@@ -62,6 +62,95 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Python-函数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/21/Python-函数/" class="article-date">
+  <time datetime="2019-07-21T15:00:09.000Z" itemprop="datePublished">2019-07-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/21/Python-函数/">Python-函数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><h3 id="基本格式"><a href="#基本格式" class="headerlink" title="基本格式"></a>基本格式</h3><ul>
+<li>函数里没有写return也可以用变量进行接收</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    sum = a + b</span><br><span class="line">    <span class="keyword">return</span> sum</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plus</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    sum = a + b</span><br><span class="line">print(add(<span class="number">10</span>, <span class="number">20</span>))</span><br><span class="line"><span class="comment">#30</span></span><br><span class="line">print(plus(<span class="number">10</span>, <span class="number">20</span>))</span><br><span class="line"><span class="comment">#None</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>python函数中任何函数都有返回值 当函数定义时有return 则函数返回值就是return所返回的内容 当函数定义时没定义return 则默认返回None</li>
+<li>一个函数中没有方法体 </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add2</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"><span class="comment">#pass是占位符</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="传参"><a href="#传参" class="headerlink" title="传参"></a>传参</h3><ul>
+<li>位置参数 按照形参的位置传值</li>
+<li>关键字参数  能和位置参数结合使用  可以传部分作为关键字 但关键字参数不能在位置参数之前 不允许重复赋值</li>
+<li>默认参数 定义函数时指定某些默认值，调用时可以通过位置参数和关键字参数对默认参数赋值</li>
+<li>非关键字可变参数 <code>func(a, b, *k)</code>k 参数的数量不一定 按照元组的形式来接收对数据类型没要求  传参以位置形式传入   但*k必须在参数列表最后</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(a, b, *k)</span>:</span></span><br><span class="line">    print(a, b, k)</span><br><span class="line">func(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="string">"abc"</span>)</span><br><span class="line"><span class="comment">#1 2 3 4 abc</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>关键字可变参数<code>func(a, b, **k)</code>传参时<code>func(1, 2, c=3, d=4)</code> <figure class="highlight plain"><figcaption><span>用字典接收  传参以键值对方式传入,但不能在关键字可变参数中传入字典   如果想传入字典时，需要解包裹参数</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```python</span><br><span class="line">def func(a, b, **k):</span><br><span class="line">    print(a, b, k)</span><br><span class="line">func(1, 2, c = 3)</span><br><span class="line">#1 2 &#123;&apos;c&apos;: 3&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="解包裹参数"><a href="#解包裹参数" class="headerlink" title="解包裹参数"></a>解包裹参数</h3><ul>
+<li>在传递元组时，让元组的每一个元素对应一个位置参数，需要解包裹传递</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_hello</span><span class="params">(name, sex)</span>:</span></span><br><span class="line">    print(name, sex)</span><br><span class="line">args = (<span class="string">'tanggu'</span>, <span class="string">'男'</span>)</span><br><span class="line">print_hello(*args)</span><br><span class="line"><span class="comment">#tanggu 男</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在传递词典字典时，让词典的每个键值对作为一个关键字参数传递给函数</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_hello</span><span class="params">(name,sex)</span>:</span></span><br><span class="line">    <span class="keyword">print</span> (name,sex)</span><br><span class="line">kargs = &#123;<span class="string">'name'</span>: <span class="string">'tanggu'</span>, <span class="string">'sex'</span>: <span class="string">'男'</span>&#125;</span><br><span class="line">print_hello(**kargs)</span><br><span class="line"><span class="comment">#tanggu 男</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><ul>
+<li>全局变量与局部变量</li>
+<li>函数中想要使用全局变量 可直接访问 比如输出，但不能修改</li>
+<li>想赋值或修改 则用 global关键字</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># (此为全局变量)</span></span><br><span class="line">i = <span class="number">10</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func1</span><span class="params">()</span>:</span></span><br><span class="line"><span class="comment">#(此为局部变量)</span></span><br><span class="line">    i = <span class="number">11</span></span><br><span class="line">    print(i)</span><br><span class="line">func1()</span><br><span class="line">print(i)</span><br><span class="line"><span class="comment">#11</span></span><br><span class="line"><span class="comment">#10</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>函数内操作全局变量</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># (此为全局变量)</span></span><br><span class="line">i = <span class="number">10</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">()</span>:</span></span><br><span class="line">    i = i + <span class="number">1</span></span><br><span class="line"><span class="comment">#报错</span></span><br><span class="line"><span class="comment">#函数内部不能修改全局变量</span></span><br><span class="line">func()</span><br><span class="line">print(i)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># (此为全局变量)</span></span><br><span class="line">i = <span class="number">10</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">()</span>:</span></span><br><span class="line"><span class="comment">#声明使用全局变量</span></span><br><span class="line">    <span class="keyword">global</span> i</span><br><span class="line">    i = i + <span class="number">1</span></span><br><span class="line">    print(i)</span><br><span class="line">func()</span><br><span class="line">print(i)</span><br><span class="line"><span class="comment">#11</span></span><br><span class="line"><span class="comment">#11</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>函数内的函数调用外部函数的变量</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">()</span>:</span></span><br><span class="line">    i = <span class="number">10</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">func1</span><span class="params">()</span>:</span></span><br><span class="line"><span class="comment">#内部函数使用外部函数的i 使用nonlocal声明</span></span><br><span class="line">        <span class="keyword">nonlocal</span> i</span><br><span class="line">        i = i + <span class="number">1</span></span><br><span class="line">        print(i)</span><br><span class="line">    func1()</span><br><span class="line">    print(i)</span><br><span class="line">func()</span><br><span class="line"><span class="comment">#11</span></span><br><span class="line"><span class="comment">#11</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#(此为全局变量)</span></span><br><span class="line">i = <span class="number">10</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> i</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">func1</span><span class="params">()</span>:</span></span><br><span class="line"><span class="comment">#报错 nonlocal只能调取外部函数的局部变量，如果外部函数是个全局变量则报错</span></span><br><span class="line"><span class="comment">#nonlocal只找上层的局部变量 如果上层也是nonlocal 可以通过</span></span><br><span class="line">        <span class="keyword">nonlocal</span> i</span><br><span class="line">        i = i + <span class="number">1</span></span><br><span class="line">        print(i)</span><br><span class="line">    func1()</span><br><span class="line">    print(i)</span><br><span class="line">func()</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/21/Python-函数/" data-id="cjyeac6rm0009q4vej8qqu6ko" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Python-for循环迭代器" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/07/21/Python-for循环迭代器/" class="article-date">
@@ -132,7 +221,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/21/Python-for循环迭代器/" data-id="cjye6w2dt00077wvet2m3ex7o" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/21/Python-for循环迭代器/" data-id="cjyeac6rj0008q4veem7vop5o" class="article-share-link">Share</a>
       
       
     </footer>
@@ -193,7 +282,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/21/Python-Django/" data-id="cjye6w2ds00067wvegyaceyod" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/21/Python-Django/" data-id="cjyeac6re0007q4ve17srz8ha" class="article-share-link">Share</a>
       
       
     </footer>
@@ -348,7 +437,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/21/Python-基础/" data-id="cjye6w2dz00097wvekq0e9tza" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/21/Python-基础/" data-id="cjyeac6rp000aq4vej7hhs8i5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -484,7 +573,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/21/SSM框架基础/" data-id="cjye6w2e4000d7wvetek2o5wk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/21/SSM框架基础/" data-id="cjyeac6rw000eq4veu8os5efn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -530,6 +619,10 @@
       <ul>
         
           <li>
+            <a href="/2019/07/22/3-LeetCode/">3-LeetCode</a>
+          </li>
+        
+          <li>
             <a href="/2019/07/22/438-LeetCode/">438-LeetCode</a>
           </li>
         
@@ -543,10 +636,6 @@
         
           <li>
             <a href="/2019/07/22/DataMining-FPTree/">DataMining-FPTree</a>
-          </li>
-        
-          <li>
-            <a href="/2019/07/22/DataMining-CART1/">DataMining-CART1</a>
           </li>
         
       </ul>
