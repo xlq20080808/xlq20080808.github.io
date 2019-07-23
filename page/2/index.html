@@ -62,6 +62,173 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Python-异常和IO" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/21/Python-异常和IO/" class="article-date">
+  <time datetime="2019-07-21T15:00:42.000Z" itemprop="datePublished">2019-07-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/21/Python-异常和IO/">Python-异常和IO</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line"></span><br><span class="line"><span class="comment">#可能出现异常的代码段</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">except</span> <span class="string">"""(错误类型)"""</span>：<span class="comment">#加错误类型 可以不加</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#异常处理</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line"></span><br><span class="line"><span class="comment">#最终执行 无论异常是否发生</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>try里边出现异常 直接跳出执行except然后执行下面代码  try里边剩余的语句不执行</li>
+<li>如果不加except或者except后加的类型与异常的类型不同    则执行完finally报错后就停止不执行下面代码</li>
+</ul>
+<h2 id="断言"><a href="#断言" class="headerlink" title="断言"></a>断言</h2><ul>
+<li>在程序发生异常之前，先做一个断言操作 多用于程序调试阶段</li>
+</ul>
+<p><code>assert 1 == 2 , &quot;错误的表达式&quot;</code></p>
+<ul>
+<li>当表达式返回时False时 抛出断言的错误，输出自定义的错误信息</li>
+</ul>
+<h1 id="IO流"><a href="#IO流" class="headerlink" title="IO流"></a>IO流</h1><h3 id="读模式"><a href="#读模式" class="headerlink" title="读模式"></a>读模式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 默认参数 mode =‘r’只读</span></span><br><span class="line">file = open(<span class="string">"d://file.txt"</span>)  </span><br><span class="line"><span class="comment">#默认读取所有内容</span></span><br><span class="line">content = file.read () </span><br><span class="line"><span class="comment">#读3字节数内容</span></span><br><span class="line">content = file.read(<span class="number">3</span>) </span><br><span class="line"><span class="comment">#默认读取第一行的内容 按行读读完跳下一行  继续readline是继续向下读取，直至结束</span></span><br><span class="line">content2 = file.readline()  </span><br><span class="line"><span class="comment">#读下一行</span></span><br><span class="line">content3 = file.readline()</span><br><span class="line"><span class="comment">#对应参数下该行中对应字节的内容 </span></span><br><span class="line">content = file.readline(<span class="number">3</span>)</span><br><span class="line"><span class="comment">#默认读取所有行数  返回列表</span></span><br><span class="line">content = file.readlines() </span><br><span class="line"><span class="comment">#参数值大于0时只读取第一行 小于等于0读取所有行内容的列表</span></span><br><span class="line">content = file.redlines(<span class="number">2</span>) </span><br><span class="line"><span class="comment">#关闭IO流</span></span><br><span class="line">file.close()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>当文件不存在时，会抛出异常</li>
+</ul>
+<h3 id="写模式"><a href="#写模式" class="headerlink" title="写模式"></a>写模式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#文件通过w操作进行写操作时，会覆盖掉该文件中原来的内容  文件不存在会创建，然后完成写操作  </span></span><br><span class="line">file = open(<span class="string">"d://file.txt"</span>,<span class="string">'w'</span>) </span><br><span class="line">content = <span class="string">"我要写入这句话"</span></span><br><span class="line">file.write(content)</span><br><span class="line">file.close()</span><br></pre></td></tr></table></figure>
+
+<h3 id="追加写模式"><a href="#追加写模式" class="headerlink" title="追加写模式"></a>追加写模式</h3><ul>
+<li>文件内容基础上继续在尾部追加内容</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">file = open(<span class="string">"d://file.txt"</span>,<span class="string">'a'</span>)    </span><br><span class="line">content = <span class="string">"我要写入这句话"</span></span><br><span class="line">file.write(content)</span><br><span class="line">file.close()</span><br></pre></td></tr></table></figure>
+
+<h3 id="读写模式"><a href="#读写模式" class="headerlink" title="读写模式"></a>读写模式</h3><h4 id="r"><a href="#r" class="headerlink" title="r+"></a>r+</h4><ul>
+<li>读模式的基础上覆盖写 要求文件必须存在</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file = open(“d://file.txt”, <span class="string">'r+'</span>)   覆盖写入 但当文件不存在时抛出异常</span><br></pre></td></tr></table></figure>
+
+<h4 id="w"><a href="#w" class="headerlink" title="w+"></a>w+</h4><ul>
+<li>写模式下增加读操作，文件不存在时创建</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file = open(“d://file.txt”, <span class="string">'r、w+'</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="二进制读写"><a href="#二进制读写" class="headerlink" title="二进制读写"></a>二进制读写</h4><ul>
+<li>rb和wb ，以二进制形式读写，常用于音频 图片</li>
+</ul>
+<h1 id="文件和目录"><a href="#文件和目录" class="headerlink" title="文件和目录"></a>文件和目录</h1><ul>
+<li>创建目录os.mkdir</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="comment">#返回操作系统名字</span></span><br><span class="line"><span class="keyword">print</span> (os.environ)  </span><br><span class="line"><span class="comment">#点代表当前路径 path,abspath 绝对路径</span></span><br><span class="line"><span class="keyword">print</span> (os.path.abspath(<span class="string">"."</span>))</span><br><span class="line"><span class="comment">#返回当前目录下所有文件</span></span><br><span class="line"><span class="keyword">print</span> (os.listdir(<span class="string">"."</span>))</span><br><span class="line"><span class="comment">#以文件名为切割 得到该文件的位置</span></span><br><span class="line">print(os.path.split(<span class="string">r"D:\pycharm\io\file_test1.py"</span>))</span><br><span class="line"><span class="comment">#返回路径和文件名（2个元素）</span></span><br><span class="line"><span class="comment"># 得到路径（带文件名）和后缀(2个元素)</span></span><br><span class="line"><span class="keyword">print</span> (os.path.splitext(<span class="string">r"D:\pycharm\io\file_test1.py"</span>))</span><br></pre></td></tr></table></figure>
+
+<h1 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h1><ul>
+<li>将对象存到文件当中</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line">d = &#123;<span class="string">'one'</span>: <span class="number">1</span>, <span class="string">'two'</span>: <span class="number">2</span>, <span class="string">'three'</span>: <span class="number">3</span>&#125;</span><br><span class="line">file = open(<span class="string">"d://file.txt"</span>, <span class="string">'wb'</span>)  <span class="comment">#w是以字符串</span></span><br><span class="line"><span class="comment">#进行序列化 </span></span><br><span class="line">pickle.dump(d, file)</span><br><span class="line">file.close()</span><br></pre></td></tr></table></figure>
+
+<h2 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">file = open(<span class="string">"d://file.txt"</span>, <span class="string">'rb'</span>)</span><br><span class="line">d2 = pickle.load(file)</span><br><span class="line">print(d2)</span><br><span class="line">file.close()</span><br></pre></td></tr></table></figure>
+
+<h2 id="json序列化"><a href="#json序列化" class="headerlink" title="json序列化"></a>json序列化</h2><ul>
+<li>为使其他编程语言识别</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line">d =  &#123;<span class="string">'one'</span>: <span class="number">1</span>, <span class="string">'two'</span>: <span class="number">2</span>, <span class="string">'three'</span>: <span class="number">3</span>&#125;</span><br><span class="line">file = open(<span class="string">"d://file.txt"</span>,<span class="string">'w'</span>)</span><br><span class="line">json .dump(d, file)</span><br><span class="line">file.close()</span><br></pre></td></tr></table></figure>
+
+<h3 id="with-as打开文件"><a href="#with-as打开文件" class="headerlink" title="with as打开文件"></a>with as打开文件</h3><ul>
+<li>不需要关闭IO流</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">"D://file.txt"</span>, <span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    content = f.read()</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/21/Python-异常和IO/" data-id="cjyf5ntbo000apkve1ehobfp1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Python-网络爬虫" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/21/Python-网络爬虫/" class="article-date">
+  <time datetime="2019-07-21T15:00:25.000Z" itemprop="datePublished">2019-07-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/21/Python-网络爬虫/">Python-网络爬虫</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="网络爬虫"><a href="#网络爬虫" class="headerlink" title="网络爬虫"></a>网络爬虫</h1><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><ul>
+<li>网络爬虫：按照一定规则从互联网获取信息的一组程序</li>
+<li>通用网络爬虫：通过访问URL路径过程中不断更新其中URL路径集，反复访问获取数据的过程</li>
+<li>聚集网络爬虫：访问路径前，通过网页解析算法，对路径进行筛选，筛选后获取所需的网页数据过程</li>
+<li>通过互联网以及URL获取网页数据的过程</li>
+</ul>
+<h3 id="urlopen"><a href="#urlopen" class="headerlink" title="urlopen"></a>urlopen</h3><ul>
+<li>打开路径对应的网页，完成生成file类型的对象，将网页源代码通过read方法进行读取，需要decode解码</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request</span><br><span class="line"><span class="comment">#得到一个file类型文件</span></span><br><span class="line">file = request.urlopen(<span class="string">"http://www.baidu.com"</span>)</span><br><span class="line">content = file.read()</span><br><span class="line">print(content)</span><br><span class="line"><span class="comment">#进行解码</span></span><br><span class="line">content = file.read().decode(<span class="string">"utf-8"</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="request"><a href="#request" class="headerlink" title="request"></a>request</h3><ul>
+<li>指定请求路径及传输请求header和data的对象</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib request</span><br><span class="line">headers = &#123;&#125;</span><br><span class="line">req = request.Request(<span class="string">'http://www.baidu.com'</span>,headers=headers)</span><br><span class="line">file = request.urlopen(req)</span><br><span class="line">content = file.read().decode(<span class="string">"utf-8"</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="post数据"><a href="#post数据" class="headerlink" title="post数据"></a>post数据</h3><ul>
+<li>当urlopen函数参数data不为None时，</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request,parse</span><br><span class="line">data = &#123;<span class="string">'did'</span>: <span class="number">6</span>&#125;</span><br><span class="line"><span class="comment">#对data进行转换，否则不能进行传送</span></span><br><span class="line">data = parse.urlencode(data)</span><br><span class="line">file = request.urlopen(<span class="string">"http://www.dycollege.net/dept?%s"</span>%data)</span><br><span class="line">content = file.read().decode(<span class="string">"utf-8"</span>)</span><br><span class="line">print(content)</span><br></pre></td></tr></table></figure>
+
+<h3 id="quote"><a href="#quote" class="headerlink" title="quote"></a>quote</h3><ul>
+<li>对字符串编码,按照url形式进行编码</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request</span><br><span class="line">s = <span class="string">"年 货"</span></span><br><span class="line"><span class="comment">#编码</span></span><br><span class="line">result = request.quote(s)</span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request</span><br><span class="line">s = <span class="string">"青 岛"</span></span><br><span class="line"><span class="comment">#解码</span></span><br><span class="line">result = request.unquote(s)</span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>
+
+<h3 id="quote-plus"><a href="#quote-plus" class="headerlink" title="quote plus"></a>quote plus</h3><ul>
+<li>带加号的编码形式</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request</span><br><span class="line">s = <span class="string">"青 岛"</span></span><br><span class="line">result = parse.quote.plus(s)</span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request</span><br><span class="line"><span class="comment">#直接将远程数据下载到本地</span></span><br><span class="line">request.urlretrieve(<span class="string">"远程数据路径"</span>,<span class="string">'d:/'</span>)</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/21/Python-网络爬虫/" data-id="cjyf5ntbk0009pkvebsfmtjvk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Python-函数" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/07/21/Python-函数/" class="article-date">
@@ -141,7 +308,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/21/Python-函数/" data-id="cjyecsa1u0008lwvejvgdomxy" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/21/Python-函数/" data-id="cjyf5ntbg0007pkvexukjs25m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -221,7 +388,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/21/Python-for循环迭代器/" data-id="cjyecsa1w0009lwvedja6o95b" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/21/Python-for循环迭代器/" data-id="cjyf5ntbc0006pkve7tkdcqni" class="article-share-link">Share</a>
       
       
     </footer>
@@ -282,7 +449,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/21/Python-Django/" data-id="cjyecsa1r0007lwve9dco289f" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/21/Python-Django/" data-id="cjyf5ntba0005pkvezncwyfk8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -437,7 +604,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/21/Python-基础/" data-id="cjyecsa1x000alwveoyq1rhjg" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/21/Python-基础/" data-id="cjyf5ntcb000gpkvefxhk8eqw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -573,7 +740,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/21/SSM框架基础/" data-id="cjyecsa24000elwveldaft0ue" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/21/SSM框架基础/" data-id="cjyf5ntc7000epkve5ax4ckgl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -619,6 +786,14 @@
       <ul>
         
           <li>
+            <a href="/2019/07/23/二分查找/">二分查找</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/23/复杂度分析/">复杂度分析</a>
+          </li>
+        
+          <li>
             <a href="/2019/07/22/3-LeetCode/">3-LeetCode</a>
           </li>
         
@@ -628,14 +803,6 @@
         
           <li>
             <a href="/2019/07/22/DataMining-ID3/">DataMining-ID3</a>
-          </li>
-        
-          <li>
-            <a href="/2019/07/22/DataMining-HMM/">DataMining-HMM</a>
-          </li>
-        
-          <li>
-            <a href="/2019/07/22/DataMining-FPTree/">DataMining-FPTree</a>
           </li>
         
       </ul>

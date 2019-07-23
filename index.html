@@ -62,6 +62,222 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-二分查找" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/23/二分查找/" class="article-date">
+  <time datetime="2019-07-23T01:43:06.000Z" itemprop="datePublished">2019-07-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/23/二分查找/">二分查找</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="算法总结-二分查找"><a href="#算法总结-二分查找" class="headerlink" title="算法总结 二分查找"></a>算法总结 二分查找</h1><h3 id="1-步骤"><a href="#1-步骤" class="headerlink" title="1.步骤"></a>1.步骤</h3><ul>
+<li>先找出有序集合中的中间元素，若目标元素大于中间元素，将low设为mid+1；若目标元素小于中间元素，将high设为mid-1</li>
+<li>重复上述步骤直到mid=target；若当low&gt;high，则不存在目标元素</li>
+</ul>
+<h3 id="2-一般实现"><a href="#2-一般实现" class="headerlink" title="2.一般实现"></a>2.一般实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Binary_Search</span> </span>&#123;</span><br><span class="line">	<span class="comment">// A为待查数组，target为目标数,n为A中元素个数，找到后返回在A中的索引，不存在则返回-1 </span></span><br><span class="line">	<span class="comment">// A必须为有序数组</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span>[] A, <span class="keyword">int</span> target, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> low = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> high = n-<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">int</span> mid;</span><br><span class="line">		<span class="keyword">while</span>(low&lt;=high)&#123;</span><br><span class="line">			mid = low + (high - low)/<span class="number">2</span>;</span><br><span class="line">			<span class="keyword">if</span>(A[mid]&gt;target)&#123;</span><br><span class="line">				high = mid-<span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (A[mid]&lt;target)&#123;</span><br><span class="line">				low = mid+<span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span>&#123;</span><br><span class="line">				<span class="keyword">return</span> mid;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-注意事项"><a href="#3-注意事项" class="headerlink" title="3.注意事项"></a>3.注意事项</h3><ul>
+<li>边界条件为 low&lt;=high 当为边界时，即low==high，仍执行循环，此时 mid=low=high，若A[mid]!=target 则继续改变low或high 使得不满足边界条件，结束循环返回-1；</li>
+<li><code>mid = low + (high - low)/2;</code>为防止high+low造成数据溢出</li>
+</ul>
+<h3 id="4-复杂度分析"><a href="#4-复杂度分析" class="headerlink" title="4.复杂度分析"></a>4.复杂度分析</h3><ul>
+<li><p>复杂度：O(log n)</p>
+</li>
+<li><p>一个算法如 果能在每个步骤去掉一半数据元素，如二分检索，通常它就取 O(logn)时间。</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/23/二分查找/" data-id="cjyf5ntbr000cpkve7vqjv3r0" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-复杂度分析" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/23/复杂度分析/" class="article-date">
+  <time datetime="2019-07-23T01:30:01.000Z" itemprop="datePublished">2019-07-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/23/复杂度分析/">复杂度分析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><h2 id="1-时间复杂度"><a href="#1-时间复杂度" class="headerlink" title="1.时间复杂度"></a>1.时间复杂度</h2><ul>
+<li>一个用高级语言编写的程序在计算机上运行时所消耗的时间取决于下列因素：<ul>
+<li>算法采用的策略、方法；</li>
+<li>编译产生的代码质量；</li>
+<li>问题的输入规模；</li>
+<li>机器执行指令的速度。</li>
+</ul>
+</li>
+<li>一个算法是由控制结构（顺序、分支和循环3种）和原操作（指固有数据类型的操作）构成的，则算法时间取决于两者的综合效果。为了便于比较同一个问题的不同算法，通常的做法是，<strong>从算法中选取一种对于所研究的问题（或算法类型）来说是基本操作的原操作，以该基本操作的重复执行的次数作为算法的时间量度。</strong></li>
+</ul>
+<h3 id="时间频度"><a href="#时间频度" class="headerlink" title="时间频度"></a>时间频度</h3><ul>
+<li>一个算法花费的时间与算法中语句的执行次数成正比例，哪个算法中语句执行次数多，它花费时间就多。一个算法中的语句执行次数称为语句频度或时间频度。记为T(n)。</li>
+</ul>
+<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><ul>
+<li>n称为问题的规模，当n不断变化时，时间频度T(n)也会不断变化。但有时我们想知道它变化时呈现什么规律。<strong>若有某个辅助函数f(n),使得当n趋近于无穷大时，T(n)/f(n)的极限值为不等于零的常数，则称f(n)是T(n)的同数量级函数。</strong>记作<strong>T(n)=Ｏ(f(n)),</strong>称<strong>Ｏ(f(n))</strong> 为算法的渐进时间复杂度，简称时间复杂度。</li>
+<li><strong>T (n) = Ο(f (n))</strong> 表示存在一个常数C，使得在当n趋于正无穷时总有 T (n) ≤ C * f(n)。简单来说，就是T(n)在n趋于正无穷时最大也就跟f(n)差不多大。也就是说当n趋于正无穷时<strong>T (n)</strong>的上界是<strong>C * f(n)。</strong></li>
+<li>例如，O(2<em>n</em>2+n +1) = O (3<em>n</em>2+n+3) = O (7<em>n</em>2 + n) = <strong>O ( n2 )</strong> ，一般都只用<strong>O(n2)</strong>表示就可以了。注意到大O符号里隐藏着一个常数C，所以f(n)里一般不加系数。如果把T(n)当做一棵树，那么O(f(n))所表达的就是树干，只关心其中的主干，其他的细枝末节全都抛弃不管。</li>
+<li>另外，在时间频度不相同时，时间复杂度有可能相同，如T(n)=<em>n</em>2+3n+4与T(n)=4<em>n</em>2+2n+1它们的频度不同，但时间复杂度相同，都为O(<em>n</em>2)。</li>
+<li>常见的时间复杂度有：常数阶<strong>O(1)</strong>,对数阶<strong>O(log2n),</strong>线性阶<strong>O(n),</strong> 线性对数阶<strong>O(nlog2n),</strong>平方阶<strong>O(n2)，</strong>立方阶<strong>O(n3)</strong>,…， k次方阶<strong>O(nk),</strong>指数阶<strong>O(2n)。</strong></li>
+<li><strong>Ο(1)＜Ο(log2n)＜Ο(n)＜Ο(nlog2n)＜Ο(n^2)＜Ο(n^3)＜…＜Ο(2^n)＜Ο(n!)</strong></li>
+</ul>
+<h1 id="2-P与NP问题"><a href="#2-P与NP问题" class="headerlink" title="2.P与NP问题"></a>2.P与NP问题</h1><h2 id="1-P问题"><a href="#1-P问题" class="headerlink" title="1.P问题"></a>1.P问题</h2><ul>
+<li>定义：在多项式时间内可解的问题为P问题（Polynomial Problem，多项式问题）。</li>
+<li>时间复杂度为Ο(1)、Ο(log2n)、Ο(n)、Ο(nlog2n)、Ο(n^2)、Ο(n^3) 为多项式时间复杂度</li>
+</ul>
+<h2 id="2-NP问题"><a href="#2-NP问题" class="headerlink" title="2.NP问题"></a>2.NP问题</h2><ul>
+<li>定义：NP问题（(Non-deterministic Polynomial Problem，非确定性多项式问题），指问题只能通过验证给定的猜测是否正确来求解。所谓<strong>多项式</strong>指的是验证猜测可在多项式时间内完成，所谓<strong>非确定性</strong>指的是问题只能通过验证猜测来解，而不能直接求解。</li>
+<li>时间复杂度为Ο(2^n)指数时间复杂度或Ο(n!)阶乘时间复杂度,能被在多项式时间复杂度内验证的 也是NP问题</li>
+<li>P问题是NP问题的子级，能在多项式时间复杂度内解决的问题一定能在多项式时间复杂度内得到验证</li>
+</ul>
+<h2 id="3-NPC问题"><a href="#3-NPC问题" class="headerlink" title="3.NPC问题"></a>3.NPC问题</h2><h3 id="3-1约化（规约）"><a href="#3-1约化（规约）" class="headerlink" title="3.1约化（规约）"></a>3.1约化（规约）</h3><ul>
+<li>约化的标准概念：如果能找到这样一个变化法则，对任意一个程序A的输入，都能按这个法则变换成程序B的输入，使两程序的输出相同，那么我们说，问题A可约化为问题B，即可以用问题B的解法解决问题A，或者说，问题A可以“变成”问题B。 如：一元一次方程可以“归约”为一元二次方程。</li>
+<li>约化的意义： 问题A可约化为问题B”有一个重要的直观意义：B的时间复杂度高于或者等于A的时间复杂度。也就是说，问题A不比问题B难。</li>
+<li>约化的要求： 我们所说的“可约化”指的是可“多项式时间地”约化(Polynomial-time Reducible)，即变换输入的方法是能在多项式的时间里完成的。约化的过程只有用多项式的时间完成才有意义。</li>
+</ul>
+<h3 id="3-2NPC问题"><a href="#3-2NPC问题" class="headerlink" title="3.2NPC问题"></a>3.2NPC问题</h3><ul>
+<li>满足条件<ul>
+<li>它是一个NP问题</li>
+<li>所有的NP问题都可以用多项式时间约化到它。</li>
+</ul>
+</li>
+<li>NP完全问题具有如下性质：它可以在多项式时间内求解，当且仅当所有的其他的NP完全问题也可以在多项式时间内求解。这样一来,只要我们找到一个NPC问题的多项式解，所有的NP问题都可以多项式时间内约化成这个NPC问题</li>
+<li>目前，NPC问题还没有找到一个多项式时间算法，故得NP!=P</li>
+</ul>
+<h1 id="4-NPH问题"><a href="#4-NPH问题" class="headerlink" title="4.NPH问题"></a>4.NPH问题</h1><ul>
+<li>NPH问题（NP难问题，英文NP-hard问题），其满足NPC问题定义的第二条但不一定要满足第一条（就是说，NP-Hard问题要比 NPC问题的范围广，但不一定是NP问题）。</li>
+<li>就算NPC找到解决，NPH问题仍不能解决</li>
+</ul>
+<h1 id="5-求解算法时间复杂度具体步骤"><a href="#5-求解算法时间复杂度具体步骤" class="headerlink" title="5.求解算法时间复杂度具体步骤"></a>5.求解算法时间复杂度具体步骤</h1><h2 id="1-找出算法中的基本语句"><a href="#1-找出算法中的基本语句" class="headerlink" title="1.找出算法中的基本语句"></a>1.找出算法中的基本语句</h2><ul>
+<li>算法中执行次数最多的那条语句就是基本语句，通常是最内层循环的循环体。</li>
+</ul>
+<h2 id="2-计算基本语句的执行次数的数量级"><a href="#2-计算基本语句的执行次数的数量级" class="headerlink" title="2.计算基本语句的执行次数的数量级"></a>2.计算基本语句的执行次数的数量级</h2><ul>
+<li>只需计算基本语句执行次数的数量级，这就意味着只要保证基本语句执行次数的函数中的最高次幂正确即可，可以忽略所有低次幂和最高次幂的系数。</li>
+</ul>
+<h2 id="3-用大Ο记号表示算法的时间性能"><a href="#3-用大Ο记号表示算法的时间性能" class="headerlink" title="3.用大Ο记号表示算法的时间性能"></a>3.用大Ο记号表示算法的时间性能</h2><ul>
+<li>将基本语句执行次数的数量级放入大Ο记号中。</li>
+</ul>
+<h1 id="6-求解实例"><a href="#6-求解实例" class="headerlink" title="6.求解实例"></a>6.求解实例</h1><ul>
+<li>如果算法中包含嵌套的循环，则基本语句通常是最内层的循环体，如果算法中包含并列的循环，则将并列循环的时间复杂度相加。例如：</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (i=<span class="number">1</span>; i&lt;=n; i++)&#123;</span><br><span class="line">	  x++;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="keyword">for</span> (i=<span class="number">1</span>; i&lt;=n; i++)&#123;</span><br><span class="line">	<span class="keyword">for</span> (j=<span class="number">1</span>; j&lt;=n; j++)&#123;</span><br><span class="line">		 x++; </span><br><span class="line">	&#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第一个for循环的时间复杂度为Ο(n)，第二个for循环的时间复杂度为Ο(<em>n</em>2)，则整个算法的时间复杂度为Ο(n+<em>n</em>2)=Ο(<em>n</em>2)。</p>
+<h1 id="7-分析法则"><a href="#7-分析法则" class="headerlink" title="7.分析法则"></a>7.分析法则</h1><ol>
+<li><p>Ο(1)表示基本语句的执行次数是一个常数，一般来说，只要算法中不存在循环语句，其时间复杂度就是Ο(1)。</p>
+</li>
+<li><p>对于顺序结构,需要依次执行一系列语句所用的时间可采用大O下”求和法则”</p>
+<ul>
+<li><p>求和法则：是指若算法的2个部分时间复杂度分别为 T1(n)=O(f(n))和 T2(n)=O(g(n)),则 T1(n)+T2(n)=O(max(f(n), g(n)))</p>
+<p>特别地,若T1(m)=O(f(m)), T2(n)=O(g(n)),则 T1(m)+T2(n)=O(f(m) + g(n))</p>
+<p>即当问题规模相同时，取最大值为问题时间复杂度，当问题规模不同时，求和是两问题的同级函数相加后的时间复杂度</p>
+</li>
+</ul>
+</li>
+<li><p>对于选择结构,如if语句,它的主要时间耗费是在执行then字句或else字句所用的时间,需注意的是检验条件也需要O(1)时间</p>
+</li>
+<li><p>对于循环结构,循环语句的运行时间主要体现在多次迭代中执行循环体以及检验循环条件的时间耗费,一般可用大O下”乘法法则”</p>
+<ul>
+<li>乘法法则：是指若算法的2个部分时间复杂度分别为 T1(n)=O(f(n))和 T2(n)=O(g(n)),则·<code>T1*T2=O(f(n)*g(n))</code></li>
+</ul>
+</li>
+<li><p>O(Cf(n)) = O(f(n))</p>
+</li>
+</ol>
+<h1 id="8-常见时间复杂度"><a href="#8-常见时间复杂度" class="headerlink" title="8.常见时间复杂度"></a>8.常见时间复杂度</h1><ul>
+<li><strong>O(1)</strong></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Temp=i;</span><br><span class="line">i=j; </span><br><span class="line">j=temp;</span><br></pre></td></tr></table></figure>
+
+<p>条数再多也是O(1)</p>
+<ul>
+<li><strong>O(n2)</strong></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//交换内容</span></span><br><span class="line">sum=<span class="number">0</span>；                 <span class="comment">//（一次）  </span></span><br><span class="line"><span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)     <span class="comment">//（n+1次）  </span></span><br><span class="line">   <span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=n;j++) <span class="comment">//（n^2次）  </span></span><br><span class="line">    sum++；            <span class="comment">//（n^2次）</span></span><br></pre></td></tr></table></figure>
+
+<p>解：T(n)=2n^2+n+1 =O(n^2)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        y=y+<span class="number">1</span>;        <span class="comment">// ①   </span></span><br><span class="line">        <span class="keyword">for</span> (j=<span class="number">0</span>;j&lt;=(<span class="number">2</span>*n);j++)    </span><br><span class="line">           x++;       <span class="comment">// ②      </span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>解： 语句1的频度是n-1<br>          语句2的频度是(n-1)*(2n+1)=2n^2-n-1<br>          f(n)=2n^2-n-1+(n-1)=2n^2-2<br>          该程序的时间复杂度T(n)=O(n^2).       </p>
+<ul>
+<li><strong>O(n)</strong>  </li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a=<span class="number">0</span>;</span><br><span class="line">    b=<span class="number">1</span>;                      <span class="comment">//①</span></span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=n;i++) <span class="comment">//②</span></span><br><span class="line">    &#123;  </span><br><span class="line">       s=a+b;　　　　<span class="comment">//③</span></span><br><span class="line">       b=a;　　　　　<span class="comment">//④  </span></span><br><span class="line">       a=s;　　　　　<span class="comment">//⑤</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>O(log2n )</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> count=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span> (count&lt;n)</span><br><span class="line">&#123;</span><br><span class="line">  count=count*<span class="number">2</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 解: 由于每次count乘以2之后，就距离n更近了一分。也就是说，有多少个2相乘后大于n，则会退出循环。由2的n次方等于n，得到x=log2 n。所以这个循环时间复杂度O(logn)。</p>
+<ul>
+<li><strong>O(n^3)</strong></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">   &#123;  </span><br><span class="line">      <span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;i;j++)  </span><br><span class="line">      &#123;</span><br><span class="line">         <span class="keyword">for</span>(k=<span class="number">0</span>;k&lt;j;k++)</span><br><span class="line">            x=x+<span class="number">2</span>;  </span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>解：当i=m, j=k的时候,内层循环的次数为k当i=m时, j 可以取 0,1,…,m-1 , 所以这里最内循环共进行了0+1+…+m-1=(m-1)m/2次所以,i从0取到n, 则循环共进行了: 0+(1-1)*1/2+…+(n-1)n/2=n(n+1)(n-1)/6所以时间复杂度为O(n^3).</p>
+<h2 id="9-最坏行为和期望行为"><a href="#9-最坏行为和期望行为" class="headerlink" title="9.最坏行为和期望行为"></a>9.最坏行为和期望行为</h2><ul>
+<li><p>我们还应该区分算法的最坏情况的行为和期望行为。如快速排序的最 坏情况运行时间是 O(n^2)，但期望时间是 O(nlogn)。通过每次都仔细 地选择基准值，我们有可能把平方情况 (即O(n^2)情况)的概率减小到几乎等于 0。在实际中，精心实现的快速排序一般都能以 (O(nlogn)时间运行。<br>下面是一些常用的记法：</p>
+</li>
+<li><p>访问数组中的元素是常数时间操作，或说O(1)操作。</p>
+</li>
+<li><p>一个算法如 果能在每个步骤去掉一半数据元素，如二分检索，通常它就取 O(logn)时间。</p>
+</li>
+<li><p>用strcmp比较两个具有n个字符的串需要O(n)时间。常规的矩阵乘算法是O(n^3)，因为算出每个元素都需要将n对 元素相乘并加到一起，所有元素的个数是n^2。</p>
+</li>
+<li><p>指数时间算法通常来源于需要求出所有可能结果。例如，n个元 素的集合共有2^n个子集,所以要求出所有子集的算法将是O(2^n)的。指数算法一般说来是太复杂了，除非n的值非常小，因为，在 这个问题中增加一个元素就导致运行时间加倍。</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/23/复杂度分析/" data-id="cjyf5ntbs000dpkveblvlhcls" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-3-LeetCode" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/07/22/3-LeetCode/" class="article-date">
@@ -102,7 +318,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/22/3-LeetCode/" data-id="cjyecsa150000lwvejv6x5t67" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/22/3-LeetCode/" data-id="cjyf5ntan0000pkvew6s20po6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -151,7 +367,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/22/438-LeetCode/" data-id="cjyecsa1d0001lwvekh57yg2w" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/22/438-LeetCode/" data-id="cjyf5ntb10001pkver9qx4w1n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -189,7 +405,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/22/DataMining-ID3/" data-id="cjyecsa1o0006lwvedo5253iy" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/22/DataMining-ID3/" data-id="cjyf5ntbi0008pkve342rtndf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -227,7 +443,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/22/DataMining-HMM/" data-id="cjyecsa1n0005lwveppfac0tw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/22/DataMining-HMM/" data-id="cjyf5ntb40003pkvevexppq7e" class="article-share-link">Share</a>
       
       
     </footer>
@@ -265,7 +481,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/22/DataMining-FPTree/" data-id="cjyecsa1l0004lwvee2gvu8hd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/22/DataMining-FPTree/" data-id="cjyf5ntbq000bpkveyhgxosej" class="article-share-link">Share</a>
       
       
     </footer>
@@ -303,7 +519,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/22/DataMining-CART1/" data-id="cjyecsa1k0003lwvekwgbdtu2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/22/DataMining-CART1/" data-id="cjyf5ntb60004pkvemdv59zfr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -341,7 +557,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/22/DataMining-APRIOR/" data-id="cjyecsa1f0002lwve0s27jyz5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/22/DataMining-APRIOR/" data-id="cjyf5ntb20002pkveuadd1m61" class="article-share-link">Share</a>
       
       
     </footer>
@@ -447,174 +663,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/21/Python-正则表达式/" data-id="cjyecsa20000clwvevsvfm0ky" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Python-异常和IO" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/07/21/Python-异常和IO/" class="article-date">
-  <time datetime="2019-07-21T15:00:42.000Z" itemprop="datePublished">2019-07-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/21/Python-异常和IO/">Python-异常和IO</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line"></span><br><span class="line"><span class="comment">#可能出现异常的代码段</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">except</span> <span class="string">"""(错误类型)"""</span>：<span class="comment">#加错误类型 可以不加</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#异常处理</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line"></span><br><span class="line"><span class="comment">#最终执行 无论异常是否发生</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>try里边出现异常 直接跳出执行except然后执行下面代码  try里边剩余的语句不执行</li>
-<li>如果不加except或者except后加的类型与异常的类型不同    则执行完finally报错后就停止不执行下面代码</li>
-</ul>
-<h2 id="断言"><a href="#断言" class="headerlink" title="断言"></a>断言</h2><ul>
-<li>在程序发生异常之前，先做一个断言操作 多用于程序调试阶段</li>
-</ul>
-<p><code>assert 1 == 2 , &quot;错误的表达式&quot;</code></p>
-<ul>
-<li>当表达式返回时False时 抛出断言的错误，输出自定义的错误信息</li>
-</ul>
-<h1 id="IO流"><a href="#IO流" class="headerlink" title="IO流"></a>IO流</h1><h3 id="读模式"><a href="#读模式" class="headerlink" title="读模式"></a>读模式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 默认参数 mode =‘r’只读</span></span><br><span class="line">file = open(<span class="string">"d://file.txt"</span>)  </span><br><span class="line"><span class="comment">#默认读取所有内容</span></span><br><span class="line">content = file.read () </span><br><span class="line"><span class="comment">#读3字节数内容</span></span><br><span class="line">content = file.read(<span class="number">3</span>) </span><br><span class="line"><span class="comment">#默认读取第一行的内容 按行读读完跳下一行  继续readline是继续向下读取，直至结束</span></span><br><span class="line">content2 = file.readline()  </span><br><span class="line"><span class="comment">#读下一行</span></span><br><span class="line">content3 = file.readline()</span><br><span class="line"><span class="comment">#对应参数下该行中对应字节的内容 </span></span><br><span class="line">content = file.readline(<span class="number">3</span>)</span><br><span class="line"><span class="comment">#默认读取所有行数  返回列表</span></span><br><span class="line">content = file.readlines() </span><br><span class="line"><span class="comment">#参数值大于0时只读取第一行 小于等于0读取所有行内容的列表</span></span><br><span class="line">content = file.redlines(<span class="number">2</span>) </span><br><span class="line"><span class="comment">#关闭IO流</span></span><br><span class="line">file.close()</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>当文件不存在时，会抛出异常</li>
-</ul>
-<h3 id="写模式"><a href="#写模式" class="headerlink" title="写模式"></a>写模式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#文件通过w操作进行写操作时，会覆盖掉该文件中原来的内容  文件不存在会创建，然后完成写操作  </span></span><br><span class="line">file = open(<span class="string">"d://file.txt"</span>,<span class="string">'w'</span>) </span><br><span class="line">content = <span class="string">"我要写入这句话"</span></span><br><span class="line">file.write(content)</span><br><span class="line">file.close()</span><br></pre></td></tr></table></figure>
-
-<h3 id="追加写模式"><a href="#追加写模式" class="headerlink" title="追加写模式"></a>追加写模式</h3><ul>
-<li>文件内容基础上继续在尾部追加内容</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">file = open(<span class="string">"d://file.txt"</span>,<span class="string">'a'</span>)    </span><br><span class="line">content = <span class="string">"我要写入这句话"</span></span><br><span class="line">file.write(content)</span><br><span class="line">file.close()</span><br></pre></td></tr></table></figure>
-
-<h3 id="读写模式"><a href="#读写模式" class="headerlink" title="读写模式"></a>读写模式</h3><h4 id="r"><a href="#r" class="headerlink" title="r+"></a>r+</h4><ul>
-<li>读模式的基础上覆盖写 要求文件必须存在</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file = open(“d://file.txt”, <span class="string">'r+'</span>)   覆盖写入 但当文件不存在时抛出异常</span><br></pre></td></tr></table></figure>
-
-<h4 id="w"><a href="#w" class="headerlink" title="w+"></a>w+</h4><ul>
-<li>写模式下增加读操作，文件不存在时创建</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file = open(“d://file.txt”, <span class="string">'r、w+'</span>)</span><br></pre></td></tr></table></figure>
-
-<h4 id="二进制读写"><a href="#二进制读写" class="headerlink" title="二进制读写"></a>二进制读写</h4><ul>
-<li>rb和wb ，以二进制形式读写，常用于音频 图片</li>
-</ul>
-<h1 id="文件和目录"><a href="#文件和目录" class="headerlink" title="文件和目录"></a>文件和目录</h1><ul>
-<li>创建目录os.mkdir</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="comment">#返回操作系统名字</span></span><br><span class="line"><span class="keyword">print</span> (os.environ)  </span><br><span class="line"><span class="comment">#点代表当前路径 path,abspath 绝对路径</span></span><br><span class="line"><span class="keyword">print</span> (os.path.abspath(<span class="string">"."</span>))</span><br><span class="line"><span class="comment">#返回当前目录下所有文件</span></span><br><span class="line"><span class="keyword">print</span> (os.listdir(<span class="string">"."</span>))</span><br><span class="line"><span class="comment">#以文件名为切割 得到该文件的位置</span></span><br><span class="line">print(os.path.split(<span class="string">r"D:\pycharm\io\file_test1.py"</span>))</span><br><span class="line"><span class="comment">#返回路径和文件名（2个元素）</span></span><br><span class="line"><span class="comment"># 得到路径（带文件名）和后缀(2个元素)</span></span><br><span class="line"><span class="keyword">print</span> (os.path.splitext(<span class="string">r"D:\pycharm\io\file_test1.py"</span>))</span><br></pre></td></tr></table></figure>
-
-<h1 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h1><ul>
-<li>将对象存到文件当中</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line">d = &#123;<span class="string">'one'</span>: <span class="number">1</span>, <span class="string">'two'</span>: <span class="number">2</span>, <span class="string">'three'</span>: <span class="number">3</span>&#125;</span><br><span class="line">file = open(<span class="string">"d://file.txt"</span>, <span class="string">'wb'</span>)  <span class="comment">#w是以字符串</span></span><br><span class="line"><span class="comment">#进行序列化 </span></span><br><span class="line">pickle.dump(d, file)</span><br><span class="line">file.close()</span><br></pre></td></tr></table></figure>
-
-<h2 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">file = open(<span class="string">"d://file.txt"</span>, <span class="string">'rb'</span>)</span><br><span class="line">d2 = pickle.load(file)</span><br><span class="line">print(d2)</span><br><span class="line">file.close()</span><br></pre></td></tr></table></figure>
-
-<h2 id="json序列化"><a href="#json序列化" class="headerlink" title="json序列化"></a>json序列化</h2><ul>
-<li>为使其他编程语言识别</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line">d =  &#123;<span class="string">'one'</span>: <span class="number">1</span>, <span class="string">'two'</span>: <span class="number">2</span>, <span class="string">'three'</span>: <span class="number">3</span>&#125;</span><br><span class="line">file = open(<span class="string">"d://file.txt"</span>,<span class="string">'w'</span>)</span><br><span class="line">json .dump(d, file)</span><br><span class="line">file.close()</span><br></pre></td></tr></table></figure>
-
-<h3 id="with-as打开文件"><a href="#with-as打开文件" class="headerlink" title="with as打开文件"></a>with as打开文件</h3><ul>
-<li>不需要关闭IO流</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">"D://file.txt"</span>, <span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    content = f.read()</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/21/Python-异常和IO/" data-id="cjyecsa1z000blwvey1l5543p" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Python-网络爬虫" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/07/21/Python-网络爬虫/" class="article-date">
-  <time datetime="2019-07-21T15:00:25.000Z" itemprop="datePublished">2019-07-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/21/Python-网络爬虫/">Python-网络爬虫</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="网络爬虫"><a href="#网络爬虫" class="headerlink" title="网络爬虫"></a>网络爬虫</h1><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><ul>
-<li>网络爬虫：按照一定规则从互联网获取信息的一组程序</li>
-<li>通用网络爬虫：通过访问URL路径过程中不断更新其中URL路径集，反复访问获取数据的过程</li>
-<li>聚集网络爬虫：访问路径前，通过网页解析算法，对路径进行筛选，筛选后获取所需的网页数据过程</li>
-<li>通过互联网以及URL获取网页数据的过程</li>
-</ul>
-<h3 id="urlopen"><a href="#urlopen" class="headerlink" title="urlopen"></a>urlopen</h3><ul>
-<li>打开路径对应的网页，完成生成file类型的对象，将网页源代码通过read方法进行读取，需要decode解码</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request</span><br><span class="line"><span class="comment">#得到一个file类型文件</span></span><br><span class="line">file = request.urlopen(<span class="string">"http://www.baidu.com"</span>)</span><br><span class="line">content = file.read()</span><br><span class="line">print(content)</span><br><span class="line"><span class="comment">#进行解码</span></span><br><span class="line">content = file.read().decode(<span class="string">"utf-8"</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="request"><a href="#request" class="headerlink" title="request"></a>request</h3><ul>
-<li>指定请求路径及传输请求header和data的对象</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib request</span><br><span class="line">headers = &#123;&#125;</span><br><span class="line">req = request.Request(<span class="string">'http://www.baidu.com'</span>,headers=headers)</span><br><span class="line">file = request.urlopen(req)</span><br><span class="line">content = file.read().decode(<span class="string">"utf-8"</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="post数据"><a href="#post数据" class="headerlink" title="post数据"></a>post数据</h3><ul>
-<li>当urlopen函数参数data不为None时，</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request,parse</span><br><span class="line">data = &#123;<span class="string">'did'</span>: <span class="number">6</span>&#125;</span><br><span class="line"><span class="comment">#对data进行转换，否则不能进行传送</span></span><br><span class="line">data = parse.urlencode(data)</span><br><span class="line">file = request.urlopen(<span class="string">"http://www.dycollege.net/dept?%s"</span>%data)</span><br><span class="line">content = file.read().decode(<span class="string">"utf-8"</span>)</span><br><span class="line">print(content)</span><br></pre></td></tr></table></figure>
-
-<h3 id="quote"><a href="#quote" class="headerlink" title="quote"></a>quote</h3><ul>
-<li>对字符串编码,按照url形式进行编码</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request</span><br><span class="line">s = <span class="string">"年 货"</span></span><br><span class="line"><span class="comment">#编码</span></span><br><span class="line">result = request.quote(s)</span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request</span><br><span class="line">s = <span class="string">"青 岛"</span></span><br><span class="line"><span class="comment">#解码</span></span><br><span class="line">result = request.unquote(s)</span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>
-
-<h3 id="quote-plus"><a href="#quote-plus" class="headerlink" title="quote plus"></a>quote plus</h3><ul>
-<li>带加号的编码形式</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request</span><br><span class="line">s = <span class="string">"青 岛"</span></span><br><span class="line">result = parse.quote.plus(s)</span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request</span><br><span class="line"><span class="comment">#直接将远程数据下载到本地</span></span><br><span class="line">request.urlretrieve(<span class="string">"远程数据路径"</span>,<span class="string">'d:/'</span>)</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/21/Python-网络爬虫/" data-id="cjyecsa21000dlwverjw7mcq6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/21/Python-正则表达式/" data-id="cjyf5ntc8000fpkvea9ti3w6z" class="article-share-link">Share</a>
       
       
     </footer>
@@ -660,6 +709,14 @@
       <ul>
         
           <li>
+            <a href="/2019/07/23/二分查找/">二分查找</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/23/复杂度分析/">复杂度分析</a>
+          </li>
+        
+          <li>
             <a href="/2019/07/22/3-LeetCode/">3-LeetCode</a>
           </li>
         
@@ -669,14 +726,6 @@
         
           <li>
             <a href="/2019/07/22/DataMining-ID3/">DataMining-ID3</a>
-          </li>
-        
-          <li>
-            <a href="/2019/07/22/DataMining-HMM/">DataMining-HMM</a>
-          </li>
-        
-          <li>
-            <a href="/2019/07/22/DataMining-FPTree/">DataMining-FPTree</a>
           </li>
         
       </ul>
