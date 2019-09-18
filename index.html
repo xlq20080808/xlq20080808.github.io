@@ -62,6 +62,82 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-web下路径问题(非框架)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/09/18/web下路径问题(非框架)/" class="article-date">
+  <time datetime="2019-09-18T14:19:54.124Z" itemprop="datePublished">2019-09-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1.项目web.xml中Servlet的映射路径<url-pattern>路径</url-pattern></p>
+<ul>
+<li><p>要么以“*”开关，要么为“/”开头</p>
+</li>
+<li><p>以“/”开头：相对当前项目路径，(当前项目路径 例如:<a href="http://localhost:8080/项目名/" target="_blank" rel="noopener">http://localhost:8080/项目名/</a>)　<br>request.getRequestdispacher(“/BServlet”).forward();</p>
+<p>即转发的路径为<a href="http://localhost:8080/项目名/BServlet" target="_blank" rel="noopener">http://localhost:8080/项目名/BServlet</a></p>
+<p>通俗而言 即转发以”/“开头在”/“前添加上项目的路径</p>
+</li>
+<li><p>不以“/”开头：相对当前Servlet路径。 </p>
+<p>request.getRequestdispacher(“BServlet”).forward();<br>假如当前Servlet是：<a href="http://localhost:8080/项目名/servlet/AServlet" target="_blank" rel="noopener">http://localhost:8080/项目名/servlet/AServlet</a>　<br>则这次转发的路径是<a href="http://localhost:8080/项目名/servlet/BServlet" target="_blank" rel="noopener">http://localhost:8080/项目名/servlet/BServlet</a></p>
+<p>通俗而言 即转发的请求路径不以”/开头” 在填写的请求路径前添加当前Servlet所在路径</p>
+</li>
+</ul>
+<p>3、重定向路径（客户端路径）</p>
+<ul>
+<li><p>以“/”开头：相对当前主机，例如：<a href="http://localhost:8080/" target="_blank" rel="noopener">http://localhost:8080/</a>　所以需要自己手动添加项目名<br>例如: response.sendRedirect(“/day10_1/Bservlet”);</p>
+</li>
+<li><p>不以”/“开头:相对第一个Servlet</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet</span>(<span class="string">"/xx/ListServlet"</span>)</span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">		response.sendRedirect(<span class="string">"DetailServlet"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"><span class="comment">//则重定向的路径为 http://localhost:8080/项目名/xx/DetailServlet</span></span><br></pre></td></tr></table></figure>
+
+<p>通俗而言 即重定向的请求路径不以”/开头” 在填写的请求路径前添加当前Servlet所在路径 与转发不以”/“开头相同  </p>
+</li>
+<li><p>作为重定向 建议使用以”/“开头，然后手动添加项目路径</p>
+</li>
+</ul>
+<p>4、页面中超链接和表单路径</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"/day10_1/AServlet"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"/day10_/AServlet"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"AServlet"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>与重定向相同，都是客户端路径！需要添加项目名</p>
+</li>
+<li><p>如果不以“/”开头，那么相对当前页面所在路径。(重定向是以当前Servlet所在路径)</p>
+<ul>
+<li><p>如果当前页面路径是<a href="http://localhost:8080/day10_1/html/form.html" target="_blank" rel="noopener">http://localhost:8080/day10_1/html/form.html</a>　        </p>
+</li>
+<li><p>则本次请求的路径是</p>
+<p><a href="http://localhost:8080/day10_1/html/AServlet" target="_blank" rel="noopener">http://localhost:8080/day10_1/html/AServlet</a></p>
+</li>
+</ul>
+</li>
+<li><p>所以 在项目中 放在WebContent文件下的jsp或html表单提交路径可以不以”/“开头，因WebContent下的当前    </p>
+</li>
+</ul>
+<p>​        页面路径即为</p>
+<p>​        <a href="http://localhost:8080/项目名" target="_blank" rel="noopener">http://localhost:8080/项目名</a></p>
+<p>​        而恰好请求的Servlet路径正是<a href="http://localhost:8080/项目名/Servlet名" target="_blank" rel="noopener">http://localhost:8080/项目名/Servlet名</a> </p>
+<p>​        但仍建议使用以“/”开头的路径，即绝对路径(客户端路径)，记得添加项目名！<br>5、ServletContext获取资源路径<br>​     相对当前项目目录，即当然index.jsp所在目录<br>6、ClassLoader获取资源路径<br>​     相对classes目录</p>
+<p>7、Class获取资源路径以“/”开头相对classes目录</p>
+<p>不以“/”开头相对当前.class文件所在目录。</p>
+<p>​       转载请附上原文出处链接 博文所有: <a href="https://yuzang.xyz/" target="_blank" rel="noopener">https://yuzang.xyz/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/09/18/web下路径问题(非框架)/" data-id="ck0pcujo1000cvwvea01t4824" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-二分查找" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/07/23/二分查找/" class="article-date">
@@ -104,7 +180,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/23/二分查找/" data-id="cjyf5pvre000fkwve5o2tirzh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/23/二分查找/" data-id="ck0pcujo6000gvwvev1w2q0ve" class="article-share-link">Share</a>
       
       
     </footer>
@@ -268,7 +344,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/23/复杂度分析/" data-id="cjyf5pvrf000gkwvexyc1ocmi" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/23/复杂度分析/" data-id="ck0pcujoo000hvwve8bepn6jk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -318,7 +394,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/22/3-LeetCode/" data-id="cjyf5pvqe0000kwvewj4onkfn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/22/3-LeetCode/" data-id="ck0pcujna0000vwvez743iwod" class="article-share-link">Share</a>
       
       
     </footer>
@@ -367,7 +443,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/22/438-LeetCode/" data-id="cjyf5pvqn0002kwven6uszwix" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/22/438-LeetCode/" data-id="ck0pcujnp0005vwve3o4yeja9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -405,7 +481,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/22/DataMining-ID3/" data-id="cjyf5pvqx0006kwve2orjyvsk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/22/DataMining-ID3/" data-id="ck0pcujno0004vwve51flwbri" class="article-share-link">Share</a>
       
       
     </footer>
@@ -443,7 +519,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/22/DataMining-HMM/" data-id="cjyf5pvqu0004kwvec5yte8t5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/22/DataMining-HMM/" data-id="ck0pcujnq0006vwvecoqmsibk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -481,7 +557,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/22/DataMining-FPTree/" data-id="cjyf5pvqv0005kwvenyz6gcuf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/22/DataMining-FPTree/" data-id="ck0pcujnj0002vwve0hpf5hbc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -519,7 +595,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/22/DataMining-CART1/" data-id="cjyf5pvqr0003kwveu56rgiol" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/22/DataMining-CART1/" data-id="ck0pcujnk0003vwven1fljgb1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -557,113 +633,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/22/DataMining-APRIOR/" data-id="cjyf5pvqk0001kwveffn5usxy" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Python-正则表达式" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/07/21/Python-正则表达式/" class="article-date">
-  <time datetime="2019-07-21T15:00:53.000Z" itemprop="datePublished">2019-07-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/21/Python-正则表达式/">Python-正则表达式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ul>
-<li>一组文本或特殊符号组成的字符串， 用于检索、验证或交替其他文本</li>
-</ul>
-<h2 id="常用符号"><a href="#常用符号" class="headerlink" title="常用符号"></a>常用符号</h2><h3 id="功能字符"><a href="#功能字符" class="headerlink" title="功能字符"></a>功能字符</h3><ul>
-<li><p>‘*’表示匹配0位到多位 </p>
-</li>
-<li><p>‘+’表示匹配1位到多位</p>
-</li>
-<li><p>‘？’表示匹配0位到1位</p>
-</li>
-<li><p>‘{n}’表示匹配n位</p>
-</li>
-<li><p>‘^’表示从文本开头进行匹配</p>
-</li>
-<li><p>‘$’表示结尾匹配</p>
-</li>
-<li><p>‘^’与’$’结合使用 从开头到结尾完全匹配</p>
-</li>
-<li><p>‘.’表示匹配除换行符以外任意字符 .后加{n}表示匹配任意n位</p>
-</li>
-<li><p>’{n,m}‘表示匹配n到m位 ‘{n,}’表示匹配n位及n位以上</p>
-</li>
-<li><p>‘[^]’表示不匹配本内容</p>
-</li>
-<li><p>‘.+？’匹配任意字符一次到多次，?为抑制贪婪匹配，匹配到第一个就停止</p>
-<h3 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h3></li>
-<li><p>‘\’表示转义</p>
-</li>
-<li><p>‘\d’表示匹配数字（只是一位 下同）</p>
-</li>
-<li><p>‘\w’类似等价于表示匹配字母数字下划线</p>
-</li>
-<li><p>‘\W’类似等价于表示匹配非字母数字下划线</p>
-</li>
-<li><p>‘\D’表示匹配非数字</p>
-</li>
-</ul>
-<h2 id="python中使用正则表达式"><a href="#python中使用正则表达式" class="headerlink" title="python中使用正则表达式"></a>python中使用正则表达式</h2><ul>
-<li><p>导入re模块</p>
-<h4 id="match函数"><a href="#match函数" class="headerlink" title="match函数"></a>match函数</h4><p><code>match(正则表达式，字符串, 修饰符)</code></p>
-<p>扫描字符串，从头开始匹配</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">re_str = <span class="string">"\w+@\w+\.com"</span></span><br><span class="line">content = input(<span class="string">"pls input email"</span>)</span><br><span class="line"><span class="comment">#match从开头进行匹配 </span></span><br><span class="line"><span class="comment">#匹配不成功返回None 成功返回输入数据</span></span><br><span class="line">result = re.match(re_str, content)</span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>
-
-<h4 id="search函数"><a href="#search函数" class="headerlink" title="search函数"></a>search函数</h4><p><code>search(正则表达式，字符串, 修饰符)</code></p>
-<p>扫描字符串中所有符合正则表达式的字符串，并返回第一个符合的子字符串</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">re_str = <span class="string">"\w+@\w+\.com"</span></span><br><span class="line">content = input(<span class="string">"pls input email"</span>)</span><br><span class="line"><span class="comment">#search扫描全部字符串，返回第一个符合的子字符串</span></span><br><span class="line"><span class="comment">#匹配不成功返回None 成功返回输入数据</span></span><br><span class="line">result = re.search(re_str, content)</span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>
-
-<h4 id="findall函数"><a href="#findall函数" class="headerlink" title="findall函数"></a>findall函数</h4><p><code>findall(正则表达式，字符串, 修饰符)</code></p>
-<p>扫描字符串中所有符合正则表达式的字符串，并返回所有符合规则的子字符串，把匹配到的内容组成列表</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">re_str = <span class="string">"\w+@\w+\.com"</span></span><br><span class="line">content = input(<span class="string">"pls input email"</span>)</span><br><span class="line"><span class="comment">#findall扫描全部字符串，返回所有符合的子字符串并组成列表</span></span><br><span class="line"><span class="comment">#匹配不成功返回None 成功返回输入数据</span></span><br><span class="line">result = re.findall(re_str, content)</span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>
-
-<h4 id="修饰符"><a href="#修饰符" class="headerlink" title="修饰符"></a>修饰符</h4><p>re.I 使匹配对大小写不敏感</p>
-<p>re.M 多行匹配，影响^和$</p>
-<h4 id="group函数"><a href="#group函数" class="headerlink" title="group函数"></a>group函数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="comment">#正则表达式中()表示分组</span></span><br><span class="line"><span class="comment">#先找到再分组</span></span><br><span class="line"><span class="comment">#findall函数把匹配到的所有内容组成元组列表，元组中通过分组进行区分</span></span><br><span class="line">re_str = <span class="string">"(\d&#123;3&#125;)(\w&#123;3&#125;)(@\w+)"</span></span><br><span class="line">content = input(<span class="string">"pls:"</span>)</span><br><span class="line"><span class="comment">#返回匹配成功的字符串中的第一小组中内容</span></span><br><span class="line"><span class="comment">#group(0)获取所有内容</span></span><br><span class="line"><span class="comment">#groups()把所有分组匹配到的内容组成元组</span></span><br><span class="line">result1 = re.match(re_str, content).group(<span class="number">1</span>)</span><br><span class="line">result2 = re.match(re_str, content).group(<span class="number">0</span>)</span><br><span class="line">result3 = re.match(re_str, content).groups()</span><br><span class="line">print(result1)</span><br><span class="line">print(result2)</span><br><span class="line">print(result3)</span><br></pre></td></tr></table></figure>
-
-<h4 id="split函数"><a href="#split函数" class="headerlink" title="split函数"></a>split函数</h4><p><code>split(pattern, string, maxsplit, flags)</code></p>
-<p>表达式，字符串，次数，标志位</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">re_str = <span class="string">"\d&#123;3&#125;"</span></span><br><span class="line">content = input()</span><br><span class="line"><span class="comment">#根据匹配到的子字符串对原字符串进行分割，删去匹配的子字符串</span></span><br><span class="line">result = re.split(re_str, content)</span><br><span class="line"><span class="comment">#1表示切割次数</span></span><br><span class="line">result = re.split(re_str, content, <span class="number">1</span>)</span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>
-
-<h4 id="sub函数"><a href="#sub函数" class="headerlink" title="sub函数"></a>sub函数</h4><p><code>sub(pattern, repl, string, count,  flags)</code></p>
-<p>表达式， 替换的字符串, 被替换的字符串， 次数， 标志位</p>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">re_str = <span class="string">"\d&#123;3&#125;"</span></span><br><span class="line">content = input()</span><br><span class="line"><span class="comment">#替换原字符串中正则表达式所匹配的子字符串，返回替换后的内容，不写次数表示全部替换</span></span><br><span class="line">result = re.sub(re_str, <span class="string">"hello"</span>,content)</span><br><span class="line"><span class="comment">#1表示切割次数</span></span><br><span class="line">result = re.sub(re_str, content, <span class="number">1</span>)</span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>
-
-<h4 id="subn函数"><a href="#subn函数" class="headerlink" title="subn函数"></a>subn函数</h4><p>  <code>sub(pattern, repl, string, count,  flags)</code></p>
-<p>   表达式， 替换的字符串, 被替换的字符串， 次数， 标志位</p>
-<p>   返回由替换后的内容和替换的次数组成的元组</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">re_str = <span class="string">"\d&#123;3&#125;"</span></span><br><span class="line">content = input()</span><br><span class="line"><span class="comment">#替换原字符串中正则表达式所匹配的子字符串，返回替换后的内容，不写次数表示全部替换</span></span><br><span class="line"><span class="comment">#返回的是替换后组成的元组和替换的次数</span></span><br><span class="line">result = re.subn(re_str, <span class="string">"hello"</span>,content)</span><br><span class="line"><span class="comment">#1表示切割次数</span></span><br><span class="line">result = re.subn(re_str, content, <span class="number">1</span>)</span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/21/Python-正则表达式/" data-id="cjyf5pvr9000ckwve3qxsy940" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/22/DataMining-APRIOR/" data-id="ck0pcujng0001vwve08ra9yjp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -696,7 +666,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li></ul>
     </div>
   </div>
 
@@ -707,6 +677,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/09/18/web下路径问题(非框架)/">(no title)</a>
+          </li>
         
           <li>
             <a href="/2019/07/23/二分查找/">二分查找</a>
@@ -722,10 +696,6 @@
         
           <li>
             <a href="/2019/07/22/438-LeetCode/">438-LeetCode</a>
-          </li>
-        
-          <li>
-            <a href="/2019/07/22/DataMining-ID3/">DataMining-ID3</a>
           </li>
         
       </ul>
